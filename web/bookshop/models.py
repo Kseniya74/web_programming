@@ -8,5 +8,6 @@ class Bookshop(models.Model):
 
     class Meta:
         db_table = 'Bookshop'
+        #f
 
 # Create your models here.
