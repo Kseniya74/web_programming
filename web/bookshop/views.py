@@ -1,8 +1,24 @@
-from django.shortcuts import render
-from .models import Bookshop
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import Bookshop, Users
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+
+
+def register(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'User {username} created!')
+            return redirect('main_page')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'register.html', {'form': form})
 
 
 def index(request):

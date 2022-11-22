@@ -8,6 +8,20 @@ class Bookshop(models.Model):
 
     class Meta:
         db_table = 'Bookshop'
-        #f
+
+
+class Users(models.Model):
+    login = models.CharField(max_length=255, blank=False, default='')
+    password = models.CharField(max_length=128, blank=False, default='')
+    email = models.CharField(max_length=255, blank=False, default='')
+    name = models.CharField(max_length=255, blank=False, default='')
+    role = models.CharField(max_length=255, blank=False, default='')
+
+    #def save(self, *args, **kwargs):
+    #self.password = make_password(self.password)
+    #super(User, self).save(*args, **kwargs)
+
+    class Meta:
+        db_table = 'users'
 
 # Create your models here.
